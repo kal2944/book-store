@@ -14,9 +14,9 @@ function BookList({ List: { title, author } }) {
           Comments
         </a>
 
-        <a href="/remove" className="comment">
+        <button className="comment" type="submit">
           Remove
-        </a>
+        </button>
 
         <a href="/edit" className="edit">
           Edit
