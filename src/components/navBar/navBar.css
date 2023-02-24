@@ -1,0 +1,39 @@
+.nav {
+  display: flex;
+  text-decoration: none;
+  justify-content: space-between;
+  padding: 0 60px;
+  background-color: #fff;
+  align-items: center;
+  height: 89px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.logo,
+.user {
+  text-decoration: none;
+  color: #0290ff;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.nav-links li {
+  list-style-type: none;
+}
+
+.links {
+  text-decoration: none;
+  color: #bebcbc;
+  font-size: 20px;
+}
+
+.user {
+  text-decoration: none;
+  list-style-type: none;
+}
