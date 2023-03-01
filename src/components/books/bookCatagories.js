@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { checkStatus } from '../../redux/categories/categoriesSlice';
 import './book.css';
 
 function Catagories() {
   const { categories } = useSelector((state) => state.categories);
-  const [searchField, setSearchField] = useState('');
-  const [filterResult, setFilterResult] = useState(categories);
-
-  const filterHandler = () => {
-    setFilterResult(filterResult.map((item) => item.country.includes(searchField)));
-  };
+  const dispatch = useDispatch();
+  const handleClick = () => dispatch(checkStatus());
   return (
-    <div>
-      <input type="text" value={searchField} onChange={(e) => setSearchField(e.target.value)} />
-      <button type="button" onClick={filterHandler}>Filter</button>
+    <div className="categories-wrapper">
+      <p>{categories}</p>
+      <button type="button" onClick={handleClick}>Check Status</button>
     </div>
   );
 }
