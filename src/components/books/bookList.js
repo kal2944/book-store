@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { removeBook } from '../../redux/books/booksSlice';
 import './book.css';
 
-function BookList({ List: { title, author } }) {
+function BookList({ List }) {
+  const { title, author } = List;
+  const dispatch = useDispatch();
+
   return (
     <div className="bookli">
       <div className="main">
@@ -10,29 +15,34 @@ function BookList({ List: { title, author } }) {
         <p className="bookAuthor">{author}</p>
       </div>
       <div className="list">
-        <a href="/comment" className="comment">
+        <button className="comment" type="button">
           Comments
-        </a>
-
-        <button className="comment" type="submit">
+        </button>
+        <button className="comment" type="button" onClick={() => dispatch(removeBook(List.item_id))}>
           Remove
         </button>
-
-        <a href="/edit" className="edit">
+        <button className="edit" type="button">
           Edit
-        </a>
+        </button>
       </div>
     </div>
   );
 }
 
 BookList.defaultProps = {
-  List: null,
+  List: {
+    item_id: '',
+    title: '',
+    author: '',
+  },
+
 };
 
 BookList.propTypes = {
-  List: null,
-  author: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  List: PropTypes.shape({
+    item_id: PropTypes.string,
+    author: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }),
 };
 export default BookList;
