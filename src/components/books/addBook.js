@@ -1,13 +1,61 @@
-import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { addBook } from '../../redux/books/booksSlice';
 import './book.css';
 
 function AddBook() {
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const listBooks = {
+    item_id: '',
+    title: '',
+    author: '',
+  };
+
+  const resetInput = () => {
+    setTitle('');
+    setAuthor('');
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (title && author) {
+      dispatch(
+        addBook({
+          ...listBooks,
+          item_id: uuidv4(),
+          title,
+          author,
+        }),
+      );
+      resetInput();
+    }
+  };
+
   return (
     <div className="addBook">
       <h1 className="formheading">ADD NEW BOOK</h1>
-      <form className="form">
-        <input className="inpField" type="text" placeholder="Book title" name="title" />
-        <input className="inpField" type="text" placeholder=" Auther" name="Auther" />
+      <form onSubmit={submitHandler} className="form">
+        <input
+          onChange={(e) => setTitle(e.target.value)}
+          className="inpField"
+          value={title}
+          type="text"
+          placeholder="Book title"
+          name="title"
+          required
+        />
+        <input
+          onChange={(e) => setAuthor(e.target.value)}
+          className="inpField"
+          type="text"
+          value={author}
+          placeholder=" Auther"
+          name="Auther"
+          required
+        />
         <button className="btn" type="submit">Add Book</button>
       </form>
     </div>
