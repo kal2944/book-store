@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { removeBook } from '../../redux/books/booksSlice';
+import { deleteBook, removeBook } from '../../redux/books/booksSlice';
 import './book.css';
 
-function BookList({ List }) {
+function BookList({ List, id }) {
   const { title, author } = List;
   const dispatch = useDispatch();
+
+  const removeHandler = (e) => {
+    const { id } = e.target.dataset;
+    dispatch(removeBook(id));
+    dispatch(deleteBook(id));
+  };
 
   return (
     <div className="bookli">
@@ -18,7 +24,7 @@ function BookList({ List }) {
         <button className="comment" type="button">
           Comments
         </button>
-        <button className="comment" type="button" onClick={() => dispatch(removeBook(List.item_id))}>
+        <button className="comment" data-id={id} type="button" onClick={removeHandler}>
           Remove
         </button>
         <button className="edit" type="button">
@@ -35,7 +41,7 @@ BookList.defaultProps = {
     title: '',
     author: '',
   },
-
+  id: '',
 };
 
 BookList.propTypes = {
@@ -44,5 +50,6 @@ BookList.propTypes = {
     author: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }),
+  id: PropTypes.string,
 };
 export default BookList;
