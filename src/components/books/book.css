@@ -38,6 +38,7 @@
 .book-item-left {
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
 
 .category-name {
@@ -90,6 +91,7 @@
 .list {
   display: flex;
   gap: 10px;
+  justify-content: flex-start;
 }
 
 .comment {
@@ -250,6 +252,7 @@
   flex-direction: column;
   justify-content: center;
   margin-right: 9rem;
+  width: auto;
 }
 
 .current-chapter {
