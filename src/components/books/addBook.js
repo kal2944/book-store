@@ -1,35 +1,32 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { addBook } from '../../redux/books/booksSlice';
+import { addBook, postBook } from '../../redux/books/booksSlice';
 import './book.css';
 
 function AddBook() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const listBooks = {
-    item_id: '',
-    title: '',
-    author: '',
-  };
 
   const resetInput = () => {
     setTitle('');
     setAuthor('');
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    if (!title.trim() || !author.trim()) return;
+
     if (title && author) {
-      dispatch(
-        addBook({
-          ...listBooks,
-          item_id: uuidv4(),
-          title,
-          author,
-        }),
-      );
+      const bookData = {
+        item_id: uuidv4(),
+        title,
+        author,
+        category: 'fiction',
+      };
+      dispatch(addBook(bookData));
+      dispatch(postBook(bookData));
       resetInput();
     }
   };
