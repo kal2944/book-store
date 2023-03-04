@@ -15,25 +15,33 @@
   text-decoration: none;
   color: #0290ff;
   font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .nav-links {
   display: flex;
   justify-content: space-between;
   gap: 40px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .nav-links li {
   list-style-type: none;
 }
 
-.links {
+.links,
+.links-cate {
   text-decoration: none;
   color: #bebcbc;
   font-size: 20px;
 }
 
-.user {
+.links {
+  color: var(--black-two);
+  opacity: 0.85;
+}
+
+.icon {
   text-decoration: none;
   list-style-type: none;
 }
